@@ -56,3 +56,4 @@ cucumber = `cucumber #{@feature}/#{@feature}.feature`
 File.open("#{@feature}/step_defs/#{@feature}_steps.rb", 'w') do |parsed_steps|
 	parsed_steps.write cucumber.split("You can implement step definitions for undefined steps with these snippets:").last
 end
+
