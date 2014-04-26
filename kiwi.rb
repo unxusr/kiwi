@@ -1,4 +1,5 @@
 #!/usr/bin/ruby
+
 require 'colorize'
 require_relative 'ksupport.rb'
 require 'fileutils'
@@ -16,14 +17,14 @@ steps = []
 
 while true
 	print "Add step [Y/N]: ".light_black
-  choice = gets
+	choice = gets
   if choice.downcase.strip == "y"
-    puts "step #{nsteps +1}:"
-    step = gets.capitalize
-    init_step_word = step.split(' ').first
-  if steps_keywords.include?(init_step_word)
+		puts "step #{nsteps +1}:"
+		step = gets.capitalize
+		init_step_word = step.split(' ').first
+	if steps_keywords.include?(init_step_word)
 		steps << step
-		nsteps  = nsteps ++ 1
+    nsteps  = nsteps ++ 1
   else
     puts "Error: #{init_step_word} unsupported initial value"
 		puts "Use only #{steps_keywords} keywords"
@@ -34,7 +35,6 @@ while true
     "please enter a valid choice."
   end
 end
-
 fdir =  `mkdir #{@feature}`
 File.open("#{@feature}/""#{@feature}.feature", "w") do |f|
 	f.write("Feature: #{@feature}\n")
@@ -43,7 +43,7 @@ end
 
 steps.each do |steps|
 	File.open("#{@feature}/""#{@feature}.feature", "a") do |f|
-  	f.write("\t\t#{steps}")
+		f.write("\t\t#{steps}")
   end
 end
 
@@ -54,6 +54,6 @@ f_steps = `touch #{@feature}/step_defs/#{@feature}_steps.rb`
 cucumber = `cucumber #{@feature}/#{@feature}.feature`
 
 File.open("#{@feature}/step_defs/#{@feature}_steps.rb", 'w') do |parsed_steps|
-	parsed_steps.write cucumber.split("You can implement step definitions for undefined steps with these snippets:").last
+	parsed_steps.write	cucumber.split("You can implement step definitions for undefined steps with these snippets:").last
 end
 
