@@ -2,7 +2,6 @@
 
 require 'colorize'
 require_relative 'ksupport.rb'
-require 'fileutils'
 
 print "Feature name: ".magenta
 @feature = gets.chomp
