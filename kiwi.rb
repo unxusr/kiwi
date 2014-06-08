@@ -47,13 +47,13 @@ steps.each do |steps|
   end
 end
 
-fsteps = `mkdir #{@feature}/step_defs`
+fsteps = `mkdir #{@feature}/step_definitions`
 fsupport = `mkdir #{@feature}/support`
 fenv = `touch #{@feature}/support/env.rb`
-f_steps = `touch #{@feature}/step_defs/#{@feature}_steps.rb`
+f_steps = `touch #{@feature}/step_definitions/#{@feature}_steps.rb`
 cucumber = `cucumber #{@feature}/#{@feature}.feature`
 
-File.open("#{@feature}/step_defs/#{@feature}_steps.rb", 'w') do |parsed_steps|
+File.open("#{@feature}/step_definitions/#{@feature}_steps.rb", 'w') do |parsed_steps|
 	parsed_steps.write	cucumber.split("You can implement step definitions for undefined steps with these snippets:").last
 end
 
