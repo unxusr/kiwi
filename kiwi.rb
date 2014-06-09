@@ -1,6 +1,7 @@
 #!/usr/bin/ruby
 
 require 'colorize'
+require 'fileutils'
 require_relative 'ksupport.rb'
 
 class Kiwi
@@ -56,13 +57,16 @@ class Kiwi
      f.write("\t\t#{steps}")
      end
    end
-   fsteps = `mkdir #{@feature}/step_definitions`
-   fsupport = `mkdir #{@feature}/support`
-   fenv = `touch #{@feature}/support/env.rb`
-   f_steps = `touch #{@feature}/step_definitions/#{@feature}_steps.rb`
+   FileUtils.mkdir "#{@feature}/step_definitions"
+   FileUtils.mkdir "#{@feature}/support"
+   FileUtils.touch "#{@feature}/support/env.rb"
+   FileUtils.touch "#{@feature}/step_definitions/#{@feature}_steps.rb"
+  end
+   
+  def cucumber_wrapper
    cucumber = `cucumber #{@feature}/#{@feature}.feature`
    File.open("#{@feature}/step_definitions/#{@feature}_steps.rb", 'w') do |parsed_steps|
-     parsed_steps.write cucumber.split("You can implement step definitions for undefined steps with these snippets:").last
+     parsed_steps.write cucumber.split("You can implement step definitions for undefined steps with these snippets:\n\n").last
    end
   end
 end
@@ -70,3 +74,4 @@ kiwi = Kiwi.new
 kiwi.create_feature
 kiwi.steps
 kiwi.mk_struct
+kiwi.cucumber_wrapper
