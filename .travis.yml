@@ -3,5 +3,5 @@ language: ruby
 language: shell
 script: cd kiwi
 
-script: kiwi
+script: ruby kiwi.rb
 
